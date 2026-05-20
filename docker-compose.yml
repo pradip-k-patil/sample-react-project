@@ -1,21 +1,21 @@
-version: "3"
-name: "nginx_react_project"
+version: "3.9"
 
-Services:
- app:
-   image: react-nginx:v1
-   ports:
-    - "3000:80"
-   restart: always
-   volumes:
-    - "-/nginx/nginx.conf://etc/nginx/nginx.conf:ro"
-    network:
-      network:
-        ipv4_address: *.*.*.*
-network:
-  network:
-    driver:bridge
-    ipam: 
-      config:
-        - subnet: ****
-          gateway: ****         
+name: nginx_react_project
+
+services:
+  app:
+    build: .
+
+    image: react-nginx:v1
+
+    ports:
+      - "8080:80"
+
+    restart: always
+
+    networks:
+      - reactnetwok
+
+networks:
+  reactnetwok:
+    external: true
